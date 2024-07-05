@@ -1,25 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap'
+import Home from './pages/Home';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from './components/Navbar';
+import About from './pages/About'
+import React, { useState } from 'react'
+import Menu from './pages/Menu';
+import Cart from './pages/Cart';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [cartItems, setCartItems] = useState(null);
+        return (
+            <>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Navbar />}>
+                            <Route index element={<Home />} />
+                            <Route path='/menu' element={<Menu setCartItems = {setCartItems}/>} />
+                            <Route path='/about' element={<About />} />
+                            <Route path='/cart' element={<Cart setCartItems = {setCartItems} cartItems = {cartItems}/>} />
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </>
+        );
 }
 
 export default App;
